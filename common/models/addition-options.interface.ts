@@ -1,3 +1,3 @@
-export interface AdditionOptions {
+export interface IAdditionOptions {
   secondNumber: number;
 }

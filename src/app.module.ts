@@ -7,6 +7,8 @@ import { AppService } from './app.service';
 import { MongooseModule } from './mongoose';
 import { AdditionModule } from './addition';
 
+// This option is intended for passing numbers from the .env file.
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -18,11 +20,10 @@ import { AdditionModule } from './addition';
 })
 export class AppModule {}
 
+// Option using constants
+
 // @Module({
-//   imports: [
-//     MongooseModule.forRoot({ globalNumber: 55 }),
-//     AdditionModule.forFeature({ globalNumber: 55 }, { secondNumber: 70 }),
-//   ],
+//   imports: [MongooseModule.forRoot(), AdditionModule.forFeature()],
 //   controllers: [AppController],
 //   providers: [AppService],
 // })

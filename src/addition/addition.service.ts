@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import { MongooseService } from '@app/mongoose';
+import { INumberResponse } from '@common/models';
 
 @Injectable()
 export class AdditionService {
@@ -11,14 +12,11 @@ export class AdditionService {
     private readonly _mongooseService: MongooseService,
   ) {}
 
-  getSum(): number {
-    return this._mongooseService.getFirstNumber() + this._secondNumber;
-  }
-
-  getSumAsync(): number {
-    return (
+  getSum(): INumberResponse {
+    const sumTwoNums =
       Number(this._mongooseService.getFirstNumber()) +
-      Number(this._secondNumber)
-    );
+      Number(this._secondNumber);
+
+    return { result: sumTwoNums };
   }
 }

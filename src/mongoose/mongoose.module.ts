@@ -1,18 +1,19 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+import { GLOBAL_NUMBER } from '@common/constants';
+
 import { MongooseService } from './mongoose.service';
-import { MongooseOptions } from '@common/models';
 
 @Module({})
 export class MongooseModule {
-  static forRoot(options: MongooseOptions): DynamicModule {
+  static forRoot(): DynamicModule {
     return {
       module: MongooseModule,
       providers: [
         {
-          provide: 'MONGOOSE_OPTIONS',
-          useValue: options.globalNumber,
+          provide: 'GLOBAL_NUMBER',
+          useValue: GLOBAL_NUMBER,
         },
         MongooseService,
       ],
@@ -26,9 +27,9 @@ export class MongooseModule {
       imports: [ConfigModule],
       providers: [
         {
-          provide: 'MONGOOSE_OPTIONS',
+          provide: 'GLOBAL_NUMBER',
           useFactory: (configService: ConfigService) =>
-            configService.get<number>('MONGOOSE_OPTIONS'),
+            configService.get<number>('GLOBAL_NUMBER'),
           inject: [ConfigService],
         },
         MongooseService,

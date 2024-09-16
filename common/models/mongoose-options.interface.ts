@@ -1,3 +1,3 @@
-export interface MongooseOptions {
+export interface IMongooseOptions {
   globalNumber: number;
 }

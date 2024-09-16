@@ -2,7 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { MongooseModule } from '@app/mongoose';
-import { AdditionOptions, MongooseOptions } from '@common/models';
+import { SECOND_NUMBER } from '@common/constants';
 
 import { AdditionService } from './addition.service';
 import { AdditionController } from './addition.controller';
@@ -13,17 +13,14 @@ import { AdditionController } from './addition.controller';
   providers: [AdditionService],
 })
 export class AdditionModule {
-  static forFeature(
-    mongooseOptions: MongooseOptions,
-    options: AdditionOptions,
-  ): DynamicModule {
+  static forFeature(): DynamicModule {
     return {
       module: AdditionModule,
-      imports: [MongooseModule.forRoot(mongooseOptions)],
+      imports: [MongooseModule.forRoot()],
       providers: [
         {
           provide: 'SECOND_NUMBER',
-          useValue: options.secondNumber,
+          useValue: SECOND_NUMBER,
         },
         AdditionService,
       ],
